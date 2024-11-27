@@ -1,0 +1,5 @@
+Flask==2.3.2
+Werkzeug==2.3.2
+torch==1.13.1
+ultralytics
+pyngrok==5.1.0

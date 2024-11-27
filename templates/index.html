@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartKisaan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+     <header>
+        <div class="logo-container">
+            <img src="static/images/logo.png" alt="SmartKisaan Logo" class="logo">
+            <p><span class="smart">Smart</span><span class="kisaan">Kisaan</span></p>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-items">
+                <li><a href="#disease-detection">Disease Detection</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#fertilizers">Fertilizers</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="login">
+            <a href="#login" class="button">Login</a>
+        </div>
+    </header>
+
+    <section id="home" class="home-section">
+
+        <div class="text-container">
+        <h1>Welcome to SmartKisaan</h1>
+
+            <form action="/predict" method="post" enctype="multipart/form-data" onsubmit="return checkFileSize()">
+                        <h2>Upload Image</h2>
+    <label for="file" class="fas fa-upload">Upload an image</label>
+    <input type="file" name="file" id="file" accept="image/*" required>
+    <button type="submit" class="upload-button">
+         Detect Disease
+    </button>
+</form>
+        </div>
+        <div class="image-container">
+            <img src="static/images/home.jpg" alt="Crop Doctor">
+        </div>
+    </section>
+    <section id="disease-detection" class="disease-detection">
+        <h2>Plant Disease Detection</h2>
+        <section id="upload" class="section">
+
+            {% if disease_name %}
+                <div class="result-container">
+                    <div class="row">
+                        <div class="uploaded-image">
+                            <h3>Uploaded Image:</h3>
+                            <img src="{{ image_path }}" alt="Uploaded Image" style="max-width: 500px;">
+                            <h3>Disease Detected: {{ disease_name }}</h3>
+                        </div>
+                        <div class="supplement-info">
+                            {% if supplement_image %}
+                            <h3>Supplement:</h3>
+                            <img src="{{ supplement_image }}" alt="Supplement Image" style="max-width: 200px;">
+                            {% endif %}
+                            {% if supplement_name %}
+                            <h3>{{ supplement_name }}</h3>
+                            {% endif %}
+                            {% if supplement_buylink %}
+                            <a href="{{ supplement_buylink }}">Buy Now</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if disease_description %}
+                    <div class="row disease-description">
+                        <h3>Description:</h3>
+                        <p>{{ disease_description }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+    </section>
+    <section id="services" class="section">
+        <h2>Services</h2>
+        <div class="content">
+            <div class="service-box">
+                <h3>Fast Detection</h3>
+                <p>Quickly detect diseases in plants to prevent spread.</p>
+            </div>
+            <div class="service-box">
+                <h3>Accurate Results</h3>
+                <p>Get accurate disease identification for effective treatment.</p>
+            </div>
+            <div class="service-box">
+                <h3>Easy to Use</h3>
+                <p>User-friendly interface for easy uploading and analysis of images.</p>
+            </div>
+        </div>
+    </section>
+    <section id="fertilizers" class="section">
+        <h2>Fertilizers</h2>
+        <div class="content">
+            <div class="fertilizer-box">
+                <h3>Nitrogen-Based Fertilizers</h3>
+                <p>These fertilizers are rich in nitrogen and promote healthy leaf growth.</p>
+            </div>
+            <div class="fertilizer-box">
+                <h3>Phosphorus-Based Fertilizers</h3>
+                <p>These fertilizers help promote strong root development and flowering.</p>
+            </div>
+            <div class="fertilizer-box">
+                <h3>Potassium-Based Fertilizers</h3>
+                <p>These fertilizers help improve plant resistance to diseases and stresses.</p>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="section">
+        <h2>About</h2>
+        <div class="about-content">
+            <div class="image-cont">
+                <img src="static/images/About.png" alt="About Image">
+            </div>
+            <div class="text-area">
+                <p>Welcome to our website! We are a team of passionate individuals dedicated to providing high-quality products/services to our customers. With years of experience in the industry, we strive to innovate and create solutions that meet the needs of our clients. Our commitment to excellence drives us to continuously improve and deliver exceptional results.</p>
+            </div>
+        </div>
+    </section>
+   <section id="contact" class="section">
+    <h2>Contact Form</h2>
+    <form id="contactForm">
+        <div class="form-row">
+            <div class="input-wrapper">
+                <input type="text" id="first-name" name="first-name" placeholder="First name" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="last-name" name="last-name" placeholder="Last name" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-wrapper">
+                <input type="email" id="email" name="email" placeholder="johndoe@mail.com" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-wrapper">
+                <textarea id="message" name="message" placeholder="Message" required></textarea>
+            </div>
+        </div>
+        <button type="submit">SEND MESSAGE</button>
+    </form>
+    <div id="contactResult"></div>
+</section>
+
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 K Jagadeesh. All Rights Reserved.</p>
+            <div class="social-media">
+                <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.twitter.com/your-twitter-profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/your-facebook-profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="internship">
+                <p>Intern at AIMERS</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('/contact', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const contactResultDiv = document.getElementById('contactResult');
+                contactResultDiv.innerHTML = data.message;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
